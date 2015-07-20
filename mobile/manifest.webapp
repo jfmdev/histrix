@@ -1,0 +1,18 @@
+{
+  "name": "Histrix Calculator",
+  "description": "Histrix is a JavaScript calculator with all the functionalities of the classic calculator from Windows XP / Windows Vista.",
+  "launch_path": "/index.html",
+  "icons": {
+	"16": "icon/icon_16.png",
+	"24": "icon/icon_24.png",
+	"32": "icon/icon_32.png",
+	"64": "icon/icon_64.png",
+	"128": "icon/icon_128.png",
+	"256": "icon/icon_256.png"
+  },
+  "developer": {
+    "name": "KudaLab",
+    "url": "http://snipurl.com/kudalab"
+  },
+  "default_locale": "en"
+}

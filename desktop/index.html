@@ -1,0 +1,521 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+    «Copyright 2011 José F. Maldonado»
+
+    This file is part of Histrix.
+ 
+    Histrix is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+ 
+    Histrix is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+ 
+    You should have received a copy of the GNU General Public License
+    along with Histrix. If not, see <http://www.gnu.org/licenses/>.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Histrix Calculator</title>
+    
+    <meta http-equiv="Content-Language" content="en-GB"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="keywords" content="histrix, javascript, calculator, windows xp, windows vista, open source"/>
+    <meta name="description" content="Histrix is a JavaScript calculator with the same functionalities that the classic calculator from Windows XP / Windows Vista."/>
+    
+    <link rel="shortcut icon" href="icon/histrix.ico"/>
+    <link rel="stylesheet" href="css/HistrixCalculator.css" type="text/css"/>
+    <link rel="stylesheet" href="css/HistrixCalculator.css" type="text/css"/>
+    
+    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/HistrixCalculator.js"></script>
+    <script type="text/javascript" src="js/HistrixCalculator.handlers.js"></script>
+    <script type="text/javascript" src="js/HistrixCalculator.math.js"></script>
+    <script type="text/javascript" src="js/HistrixCalculator.display.js"></script>
+    <script type="text/javascript" src="js/Init.js"></script>
+</head>
+
+<body>
+
+<form action="" method="post"><div id="HistrixCalculator">
+    <!-- Title -->
+    <div class="header">
+                <div class="help">
+                    <img src="icon/histrix.png" alt="" title="Histrix Calculator"/>
+                </div>
+         Histrix
+        <div class="mode">
+            <select name="mode">
+                <option value="standard">Standard</option>
+                <option value="scientific">Scientific</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Display -->
+    <div class="up">
+        <input type="text" name="display" value="" readonly="readonly" class="display"/>
+    </div>
+
+    <!-- Bases -->
+    <div class="up scientific">
+        <div class="left_side">
+            <input type="radio" name="base" value="hexadecimal"/><span class="label">Hex &nbsp;</span>
+            <input type="radio" name="base" value="decimal" checked="checked"/><span class="label">Dec &nbsp;</span>
+            <input type="radio" name="base" value="octal"/><span class="label">Oct &nbsp;</span>
+            <input type="radio" name="base" value="binary"/><span class="label">Bin</span>
+        </div>
+
+        <div class="right_side">
+            <span class="decimal">
+                <input type="radio" name="metric" value="degrees"/><span class="label">Degrees &nbsp;</span>
+                <input type="radio" name="metric" value="radians" checked="checked"/><span class="label">Radians &nbsp;</span>
+                <input type="radio" name="metric" value="grads"/><span class="label">Grads</span>
+            </span>
+            <span class="hexadecimal octal binary">
+                <input type="radio" name="range" value="qword" checked="checked"/><span class="label">Qword &nbsp;</span>
+                <input type="radio" name="range" value="dword"/><span class="label">Dword &nbsp;</span>
+                <input type="radio" name="range" value="word"/><span class="label">Word &nbsp;</span>
+                <input type="radio" name="range" value="byte"/><span class="label">Byte</span>
+            </span>
+        </div>
+    </div>
+
+    <div class="down">
+        <!-- Right-side buttons -->
+        <div class="right">
+            <div class="left_column">
+                <span class="square read_only"><input type="text" name="mem" readonly="readonly"/></span>
+                <a class="button square red" href="">MC</a>
+                <a class="button square red" href="">MR</a>
+                <a class="button square red" href="">MS</a>
+                <a class="button square red" href="">M+</a>
+                <span class="scientific"><a class="button square blue decimal" href="">pi</a></span>
+            </div>
+
+            <a class="button rectangle red" href="">Backspace</a>
+            <a class="button rectangle red" href="">CE</a>
+            <a class="button rectangle red scientific" href="">CA</a>
+            <a class="button square red standard" href="">CA</a>
+
+            <a class="button square blue hexadecimal decimal octal" href="">7</a>
+            <a class="button square blue hexadecimal decimal" href="">8</a>
+            <a class="button square blue hexadecimal decimal" href="">9</a>
+            <a class="button square red" href="">/</a>
+            <a class="button square red scientific" href="">Mod</a>
+            <a class="button square red scientific" href="">And</a>
+            <a class="button square blue standard" href="">sqrt</a>
+
+            <a class="button square blue hexadecimal decimal octal" href="">4</a>
+            <a class="button square blue hexadecimal decimal octal" href="">5</a>
+            <a class="button square blue hexadecimal decimal octal" href="">6</a>
+            <a class="button square red" href="">*</a>
+            <a class="button square red scientific" href="">Or</a>
+            <a class="button square red scientific" href="">Xor</a>
+            <a class="button square blue standard" href="">%</a>
+
+            <a class="button square blue" href="">1</a>
+            <a class="button square blue hexadecimal decimal octal" href="">2</a>
+            <a class="button square blue hexadecimal decimal octal" href="">3</a>
+            <a class="button square red" href="">-</a>
+            <a class="button square red scientific" href="">Lsh</a>
+            <a class="button square red scientific" href="">Not</a>
+            <a class="button square blue standard" href="">1/x</a>
+
+            <a class="button square blue" href="">0</a>
+            <a class="button square blue" href="">+/-</a>
+            <a class="button square blue decimal" href="">.</a>
+            <a class="button square red" href="">+</a>
+            <a class="button square red" href="">=</a>
+            <a class="button square red scientific" href="">Int</a>
+
+            <a class="button square fuchsia scientific hexadecimal" href="">A</a>
+            <a class="button square fuchsia scientific hexadecimal" href="">B</a>
+            <a class="button square fuchsia scientific hexadecimal" href="">C</a>
+            <a class="button square fuchsia scientific hexadecimal" href="">D</a>
+            <a class="button square fuchsia scientific hexadecimal" href="">E</a>
+            <a class="button square fuchsia scientific hexadecimal" href="">F</a>
+
+            <div style="clear:both"></div>
+        </div>
+        
+        <!-- Left-side buttons -->
+        <div class="left scientific">
+
+            <div class="row">
+                <div class="inv_hyp_column">
+                    <input type="checkbox" name="inv" value="inv"/> <span class="label">Inv</span>
+                    &nbsp;&nbsp;
+                    <input type="checkbox" name="hyp" value="hyp"/> <span class="label">Hyp</span>
+                </div>
+
+                <span class="square read_only"><input type="text" name="par" readonly="readonly"/></span>
+
+                <div style="clear:both"></div>
+            </div>
+                
+
+            <div class="left_column">
+                <a class="button square blue" href="">Sta</a>
+                <a class="button square blue stadistic" href="">Ave</a>
+                <a class="button square blue stadistic" href="">Sum</a>
+                <a class="button square blue stadistic" href="">s</a>
+                <a class="button square blue stadistic" href="">Dat</a>
+            </div>
+
+            <a class="button square fuchsia decimal" href="">F-E</a>
+            <a class="button square fuchsia" href="">(</a>
+            <a class="button square fuchsia" href="">)</a>
+
+            <a class="button square fuchsia decimal" href="">dms</a>
+            <a class="button square fuchsia decimal" href="">Exp</a>
+            <a class="button square fuchsia" href="">ln</a>
+
+            <a class="button square fuchsia decimal" href="">sin</a>
+            <a class="button square fuchsia" href="">x^y</a>
+            <a class="button square fuchsia" href="">log</a>
+
+            <a class="button square fuchsia decimal" href="">cos</a>
+            <a class="button square fuchsia" href="">x^3</a>
+            <a class="button square fuchsia" href="">n!</a>
+
+            <a class="button square fuchsia decimal" href="">tan</a>
+            <a class="button square fuchsia" href="">x^2</a>
+            <a class="button square fuchsia" href="">1/x</a>
+
+            <div style="clear:both"></div>
+        </div>
+
+        <div style="clear:both"></div>
+    </div>
+
+    <div id="HistrixCalculator_stadistics">
+        <div>
+            <select name="datos" multiple="multiple" size="4" style="width:100%;">
+
+            </select>
+        </div>
+        <div>
+            <button name="ret" class="">Ret</button>
+            <button name="load" class="">Load</button>
+            <button name="cd" class="">CD</button>
+            <button name="cad" class="">CAD</button>
+        </div>
+    </div>
+</div></form>
+
+
+<div id="div_help">
+
+    <table class="guide">
+        <tr>
+            <td class="column">
+                <table class="button_group">
+                    <tr>
+                        <td class="button red">Backspace</td>
+                        <td class="definition">Deletes the last digit of the displayed number.</td>
+                    </tr>
+                    <tr>
+                        <td class="button red">CE</td>
+                        <td class="definition">Clears the number displayed at that time.</td>
+                    </tr>
+                    <tr>
+                        <td class="button red">CA</td>
+                        <td class="definition">Clears the entire calculation.</td>
+                    </tr>
+                </table>
+                
+                <table class="button_group">
+                    <tr>
+                        <td class="button red">MC</td>
+                        <td class="definition">Clears any number stored in memory.</td>
+                    </tr>
+                    <tr>
+                        <td class="button red">MR</td>
+                        <td class="definition">Recalls the number stored in memory. The number remains in memory.</td>
+                    </tr>
+                    <tr>
+                        <td class="button red">MS</td>
+                        <td class="definition">Stores the displayed number in memory.</td>
+                    </tr>
+                    <tr>
+                        <td class="button red">M+</td>
+                        <td class="definition">Adds the displayed number to any number already in memory but does not display the sum of these numbers.</td>
+                    </tr>
+                </table>
+                
+               <table class="button_group scientific">
+                    <tr>
+                        <td class="button">Hex</td>
+                        <td class="definition">Converts the displayed number to the hexadecimal number system.</td>
+                    </tr>
+                    <tr>
+                        <td class="button">Dec</td>
+                        <td class="definition">Converts the displayed number to the decimal number system.</td>
+                    </tr>
+                    <tr>
+                        <td class="button">Oct</td>
+                        <td class="definition">Converts the displayed number to the octal number system.</td>
+                    </tr>
+                    <tr>
+                        <td class="button">Bin</td>
+                        <td class="definition">Converts the displayed number to the binary number system.</td>
+                    </tr>
+                </table>
+                
+                <table class="button_group scientific">
+                    <tr>
+                        <td class="button violet">F-E</td>
+                        <td class="definition">Turns scientific notation on and off. You can use "F-E" only with the decimal number system.</td>
+                    </tr>
+                    <tr>
+                        <td class="button violet">dms</td>
+                        <td class="definition">Converts the displayed number to degree-minute-second format (assuming that the displayed number is in degrees). To convert the displayed number to degrees (assuming that the displayed number is in degree-minute-second format), use "Inv " + "dms". You can use dms only with the decimal number system.</td>
+                    </tr>
+                    <tr>
+                        <td class="button violet">sin</td>
+                        <td class="definition">Calculates the sine of the displayed number. To calculate the arc sine, use Inv+sin. To calculate the hyperbolic sine, use "Hyp" + "sin". To calculate the arc hyperbolic sine, use "Inv" + "Hyp" + "sin". You can use sin only with the decimal number system.</td>
+                    </tr>
+                    <tr>
+                        <td class="button violet">cos</td>
+                        <td class="definition">Calculates the cosine of the displayed number. To calculate the arc cosine, use "Inv" + "cos". To calculate the hyperbolic cosine, use "Hyp" + "cos". To calculate the arc hyperbolic cosine, use "Inv" + "Hyp" + "cos". You can use "cos" only with the decimal number system.</td>
+                    </tr>
+                    <tr>
+                        <td class="button violet">tan</td>
+                        <td class="definition">Calculates the tangent of the displayed number. To calculate the arc tangent, use Inv+tan. To calculate the hyperbolic tangent, use "Hyp" + "tan". To calculate the arc hyperbolic tangent, use "Inv" + "Hyp" + "tan". You can use tan only with the decimal number system.</td>
+                    </tr>
+                </table>
+            </td>
+            
+            
+            
+            <td class="column">
+                <table class="button_group standard">
+                    <tr>
+                        <td class="button blue">sqrt</td>
+                        <td class="definition">Calculates the square root of the displayed number.</td>
+                    </tr>
+                    <tr>
+                        <td class="button blue">%</td>
+                        <td class="definition">Displays the result of multiplication as a percentage. Enter one number, click *, enter the second number, and then click %. For example, 50 * 25% will display 12.5. You can also perform operations with percentages. Enter one number, click the operator (+, -, *, or /), enter the second number, click %, and then click =. For example, 50 + 25% (of 50) = 62.5.</td>
+                    </tr>
+                    <tr>
+                        <td class="button blue">1/x</td>
+                        <td class="definition">Calculates the reciprocal of the displayed number.</td>
+                    </tr>
+                </table>
+                
+                <table class="button_group scientific">
+                    <tr>
+                        <td class="button red">Mod</td>
+                        <td class="definition">Displays the modulus, or remainder, of x/y. Use this button as a binary operator.</td>
+                    </tr>
+                    <tr>
+                        <td class="button red">Or</td>
+                        <td class="definition">Calculates bitwise OR. The behavior of logical operators is undefined unless the inputs are integers.</td>
+                    </tr>
+                    <tr>
+                        <td class="button red">Lsh</td>
+                        <td class="definition">Shifts left. To shift right, use "Inv" + "Lsh". After clicking this button, you must specify (in binary) how many positions to the left or to the right you want to shift the number in the display area, and then click "=". The behavior of logical operators is undefined unless the inputs are integers.</td>
+                    </tr>
+                    <tr>
+                        <td class="button red">And</td>
+                        <td class="definition">Calculates bitwise AND. The behavior of logical operators is undefined unless the inputs are integers.</td>
+                    </tr>
+                    <tr>
+                        <td class="button red">Xor</td>
+                        <td class="definition">Calculates bitwise exclusive OR. The behavior of logical operators is undefined unless the inputs are integers.</td>
+                    </tr>
+                    <tr>
+                        <td class="button red">Not</td>
+                        <td class="definition">Calculates bitwise inverse. The behavior of logical operators is undefined unless the inputs are integers.</td>
+                    </tr>
+                    <tr>
+                        <td class="button red">Int</td>
+                        <td class="definition">Displays the integer portion of a decimal value. To display the fractional portion of a decimal value, use "Inv" + "Int".</td>
+                    </tr>
+                </table>                
+
+                <table class="button_group scientific">
+                    <tr>
+                        <td class="button violet">(</td>
+                        <td class="definition">Starts a new level of parentheses. The current number of levels appears in the box above the ")" button.</td>
+                    </tr>
+                    <tr>
+                        <td class="button violet">)</td>
+                        <td class="definition">Closes the current level of parentheses.</td>
+                    </tr>
+                    <tr>
+                        <td class="button violet">Exp</td>
+                        <td class="definition">Allows entry of scientific-notation numbers. You can use only decimal digits (keys 0 through 9) in the exponent. You can use "Exp" only with the decimal number system.</td>
+                    </tr>
+                    <tr>
+                        <td class="button violet">ln</td>
+                        <td class="definition">Calculates natural (base e) logarithm. To calculate e raised to the xth power, where x is the current number, use "Inv" + "ln".</td>
+                    </tr>
+                    <tr>
+                        <td class="button violet">log</td>
+                        <td class="definition">Calculates the common (base 10) logarithm. To calculate 10 raised to the xth power, use "Inv" + "log".</td>
+                    </tr>
+                </table>
+                
+                <table class="button_group scientific">
+                    <tr>
+                        <td class="button blue">Sta</td>
+                        <td class="definition">Displays the Statistics Box dialog box and activates "Ave", "Sum", "s", and "Dat".</td>
+                    </tr>
+                    <tr>
+                        <td class="button blue">Ave</td>
+                        <td class="definition">Calculates the mean of the values displayed in the Statistics Box dialog box. To calculate the mean of the squares, use "Inv" + "Ave". This button is available only if you click "Sta" first.</td>
+                    </tr>
+                    <tr>
+                        <td class="button blue">Sum</td>
+                        <td class="definition">Calculates the sum of the values displayed in the Statistics Box dialog box. To calculate the sum of the squares, use "Inv" + "Sum". This button is available only if you click "Sta" first.</td>
+                    </tr>
+                    <tr>
+                        <td class="button blue">s</td>
+                        <td class="definition">Calculates standard deviation with the population parameter as –1. To calculate standard deviation with the population parameter as n, use "Inv" + "s". This button is available only if you click "Sta" first.</td>
+                    </tr>
+                    <tr>
+                        <td class="button blue">Dat</td>
+                        <td class="definition">Enters the displayed number in the Statistics Box dialog box. This button is available only if you click "Sta" first.</td>
+                    </tr>
+                </table>
+            </td>
+            
+            
+            
+            <td class="column">
+                <table class="button_group">
+                    <tr>
+                        <td class="button blue">0-9</td>
+                        <td class="definition">Puts this number in the calculator display.</td>
+                    </tr>
+                    <tr>
+                        <td class="button blue">+/-</td>
+                        <td class="definition">Changes the sign of the displayed number.</td>
+                    </tr>
+                    <tr>
+                        <td class="button blue">.</td>
+                        <td class="definition">Inserts a decimal point.</td>
+                    </tr>
+                    <tr class="scientific">
+                        <td class="button blue">pi</td>
+                        <td class="definition">Displays the value of pi (3.1415...). To display 2 * pi (6.28...), use "Inv" + "pi". You can use pi only with the decimal number system.</td>
+                    </tr>                    
+                    <tr class="scientific">
+                        <td class="button violet">A-F</td>
+                        <td class="definition">Enters the selected letter in the value. This button is available only if hexadecimal mode is turned on..</td>
+                    </tr>                    
+                </table>
+                
+                <table class="button_group">
+                    <tr>
+                        <td class="button red">/</td>
+                        <td class="definition">Divide.</td>
+                    </tr>
+                    <tr>
+                        <td class="button red">*</td>
+                        <td class="definition">Multiplies.</td>
+                    </tr>
+                    <tr>
+                        <td class="button red">-</td>
+                        <td class="definition">Subtracts.</td>
+                    </tr>
+                    <tr>
+                        <td class="button red">+</td>
+                        <td class="definition">Adds.</td>
+                    </tr>
+                    <tr>
+                        <td class="button red">=</td>
+                        <td class="definition">Performs any operation on the previous two numbers.</td>
+                    </tr>
+                </table>
+                 
+               <table class="button_group scientific">
+                    <tr>
+                        <td class="button">Inv</td>
+                        <td class="definition">Sets the inverse function for "sin", "cos", "tan", "PI", "x^y", "x^2", "x^3", "ln", "log", "Ave", "Sum", and "s". The functions automatically turn off the inverse function after a calculation is completed.</td>
+                    </tr>
+                    <tr>
+                        <td class="button">Hyp</td>
+                        <td class="definition">Sets the hyperbolic function for "sin", "cos", and "tan". The functions automatically turn off the hyperbolic function after a calculation is completed.</td>
+                    </tr>
+                </table>
+                 
+               <table class="button_group scientific">
+                    <tr>
+                        <td class="button">Degrees</td>
+                        <td class="definition">Sets trigonometric input for degrees when in decimal mode.</td>
+                    </tr>
+                    <tr>
+                        <td class="button">Radians</td>
+                        <td class="definition">Sets trigonometric input for radians when in decimal mode.</td>
+                    </tr>
+                    <tr>
+                        <td class="button">Grads</td>
+                        <td class="definition">Sets trigonometric input for grads when in decimal mode.</td>
+                    </tr>
+                </table>
+
+                <table class="button_group scientific">
+                    <tr>
+                        <td class="button violet">x^y</td>
+                        <td class="definition">Computes x raised to the yth power. Use this button as a binary operator. To calculate the yth root of x, use "Inv" + "x^y".</td>
+                    </tr>
+                    <tr>
+                        <td class="button violet">x^3</td>
+                        <td class="definition">Cubes the displayed number. To calculate the cube root, use "Inv" + "x^3".</td>
+                    </tr>
+                    <tr>
+                        <td class="button violet">x^2</td>
+                        <td class="definition">Squares the displayed number. To calculate the square root, use "Inv" + "x^2".</td>
+                    </tr>
+                    <tr>
+                        <td class="button violet">n!</td>
+                        <td class="definition">Calculates the factorial of the displayed number.</td>
+                    </tr>
+                    <tr>
+                        <td class="button violet">1/x</td>
+                        <td class="definition">Calculates the reciprocal of the displayed number.</td>
+                    </tr>
+                </table>
+    
+                <table class="button_group scientific">
+                    <tr>
+                        <td class="button">Ret</td>
+                        <td class="definition">Returns control to the calculator</td>
+                    </tr>
+                    <tr>
+                        <td class="button">Load</td>
+                        <td class="definition">Loads the selected data point into the display of the calculator.</td>
+                    </tr>
+                    <tr>
+                        <td class="button">CD</td>
+                        <td class="definition">Clears the selected data point out of the list</td>
+                    </tr>
+                    <tr>
+                        <td class="button">CAD</td>
+                        <td class="definition">Clears all data points out of the list</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    
+    <!--
+    <div class="license">
+        The <em>Histrix Calculator <img src="icon/histrix.png" alt="" title="Histrix Calculator" class="icon"/></em>
+        is free software: you can redistribute it and/or modify it under the terms of the 
+        <a href="http://www.gnu.org/licenses/gpl.html" title="GPL license">GNU General Public License</a> as published 
+        by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+    </div>
+    -->
+</div>
+
+    
+</body>
+</html>

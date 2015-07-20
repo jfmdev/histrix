@@ -1,0 +1,768 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+    «Copyright 2014 José F. Maldonado»
+
+    This file is part of Histrix.
+ 
+    Histrix is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+ 
+    Histrix is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+ 
+    You should have received a copy of the GNU General Public License
+    along with Histrix. If not, see <http://www.gnu.org/licenses/>.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Histrix Calculator</title>
+    
+    <meta http-equiv="Content-Language" content="en-GB"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="keywords" content="histrix, javascript, calculator, windows xp, windows vista, open source"/>
+    <meta name="description" content="Histrix is a JavaScript calculator with the same functionalities that the classic calculator from Windows XP / Windows Vista."/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    
+    <link rel="shortcut icon" href="icon/histrix.ico"/>
+    <link rel="stylesheet" href="css/histrix.css" type="text/css"/>
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.0.min.css" type="text/css"/>
+    
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.0.min.js"></script>
+    <script type="text/javascript" src="js/HistrixCalculator.js"></script>
+    <script type="text/javascript" src="js/HistrixCalculator.handlers.js"></script>
+    <script type="text/javascript" src="js/HistrixCalculator.math.js"></script>
+    <script type="text/javascript" src="js/HistrixCalculator.display.js"></script>
+    <script type="text/javascript" src="js/Init.js"></script>
+</head>
+
+<body>
+
+<!-- Calculator page (start) -->
+<div data-role="page" id="page_calculator">
+    
+    <!-- Header (start) -->
+    <div data-role="header" data-position="fixed">
+        <a href="index.html#page_calculator" data-role="button" data-icon="grid">Calc</a>
+        <h1><img src="icon/histrix.png" alt="" title="Histrix Calculator"/> Histrix</h1>
+        <a href="index.html#page_help" data-role="button" data-icon="info">Help</a>
+        
+        <div class="ui-grid-a">
+            <div class="ui-block-a" style="width:10%;">
+                <input type="text" name="mem" readonly="readonly" style="text-align:center;" data-theme="c"/>
+            </div>
+            <div class="ui-block-b" style="width:10%;">
+                <input type="text" name="par" readonly="readonly" style="text-align:center;" data-theme="c"/>
+            </div>
+            <div class="ui-block-c" style="width:80%;">
+                <input type="text" name="display" value="" readonly="readonly" class="display"/>
+            </div>
+        </div>
+    </div>
+    <!-- Header (end) -->
+
+    <!-- Content (start) -->
+    <div data-role="content">
+    
+        <!-- Basic controls -->
+        <div class="ui-grid-d">
+            <div class="ui-block-a">
+                <a href="#" data-role="button" class="button blue hexadecimal decimal octal">7</a>
+            </div>
+            <div class="ui-block-b">
+                <a href="#" data-role="button" class="button blue hexadecimal decimal">8</a>
+            </div>
+            <div class="ui-block-c">
+                <a href="#" data-role="button" class="button blue hexadecimal decimal">9</a>
+            </div>
+            <div class="ui-block-d">
+                <a href="#" data-role="button" class="button red">/</a>
+            </div>
+            <div class="ui-block-e">
+                <a href="#" data-role="button" class="button blue">sqrt</a>
+            </div>
+        </div>
+
+        <div class="ui-grid-d">
+            <div class="ui-block-a">
+                <a href="#" data-role="button" class="button blue hexadecimal decimal octal">4</a>
+            </div>
+            <div class="ui-block-b">
+                <a href="#" data-role="button" class="button blue hexadecimal decimal octal">5</a>
+            </div>
+            <div class="ui-block-c">
+                <a href="#" data-role="button" class="button blue hexadecimal decimal octal">6</a>
+            </div>
+            <div class="ui-block-d">
+                <a href="#" data-role="button" class="button red">*</a>
+            </div>
+            <div class="ui-block-e">
+                <a href="#" data-role="button" class="button blue">%</a>
+            </div>
+        </div>        
+
+        <div class="ui-grid-d">
+            <div class="ui-block-a">
+                <a href="#" data-role="button" class="button blue">1</a>
+            </div>
+            <div class="ui-block-b">
+                <a href="#" data-role="button" class="button blue hexadecimal decimal octal">2</a>
+            </div>
+            <div class="ui-block-c">
+                <a href="#" data-role="button" class="button blue hexadecimal decimal octal">3</a>
+            </div>
+            <div class="ui-block-d">
+                <a href="#" data-role="button" class="button red">-</a>
+            </div>
+            <div class="ui-block-e">
+                <a href="#" data-role="button" class="button blue">1/x</a>
+            </div>
+        </div>          
+
+        <div class="ui-grid-d">
+            <div class="ui-block-a">
+                <a href="#" data-role="button" class="button blue">0</a>
+            </div>
+            <div class="ui-block-b">
+                <a href="#" data-role="button" class="button blue">+/-</a>
+            </div>
+            <div class="ui-block-c">
+                <a href="#" data-role="button" class="button blue decimal">.</a>
+            </div>
+            <div class="ui-block-d">
+                <a href="#" data-role="button" class="button red">+</a>
+            </div>
+            <div class="ui-block-e">
+                <a href="#" data-role="button" class="button blue">=</a>
+            </div>
+        </div>          
+
+        <div class="hexadecimal hiddable">
+            <div class="ui-grid-b">
+                <div class="ui-block-a">
+                    <a href="#" data-role="button" class="button hexadecimal violet">A</a>
+                </div>
+                <div class="ui-block-b">
+                    <a href="#" data-role="button" class="button hexadecimal violet">B</a>
+                </div>
+                <div class="ui-block-c">
+                    <a href="#" data-role="button" class="button hexadecimal violet">C</a>
+                </div>
+            </div>              
+            <div class="ui-grid-b">
+                <div class="ui-block-a">
+                    <a href="#" data-role="button" class="button hexadecimal violet">D</a>
+                </div>
+                <div class="ui-block-b">
+                    <a href="#" data-role="button" class="button hexadecimal violet">D</a>
+                </div>
+                <div class="ui-block-c">
+                    <a href="#" data-role="button" class="button hexadecimal violet">F</a>
+                </div>
+            </div>              
+        </div>              
+        
+        <div class="ui-grid-b">
+            <div class="ui-block-a">
+                <a href="#" data-role="button" class="button red">Backspace</a>
+            </div>
+            <div class="ui-block-b">
+                <a href="#" data-role="button" class="button red">CE</a>
+            </div>
+            <div class="ui-block-c">
+                <a href="#" data-role="button" class="button red">CA</a>
+            </div>
+        </div>          
+        
+        <div class="ui-grid-c">
+            <div class="ui-block-a">
+                <a href="#" data-role="button" class="button red">MC</a>
+            </div>
+            <div class="ui-block-b">
+                <a href="#" data-role="button" class="button red">MR</a>
+            </div>
+            <div class="ui-block-c">
+                <a href="#" data-role="button" class="button red">MS</a>
+            </div>
+            <div class="ui-block-d">
+                <a href="#" data-role="button" class="button red">M+</a>
+            </div>
+        </div>          
+        <!-- Basic controls (end) -->
+
+        <!-- Integer (start) -->
+        <div data-role="collapsible">
+            <h2>Integer operations</h2>
+
+            <div class="ui-grid-c">
+                <div class="ui-block-a">
+                    <a href="#" data-role="button" class="button red">And</a>
+                </div>
+                <div class="ui-block-b">
+                    <a href="#" data-role="button" class="button red">Or</a>
+                </div>
+                <div class="ui-block-c">
+                    <a href="#" data-role="button" class="button red">Not</a>
+                </div>
+                <div class="ui-block-d">
+                    <a href="#" data-role="button" class="button red">Xor</a>
+                </div>
+            </div>
+            
+            <div class="ui-grid-b">
+                <div class="ui-block-a">
+                    <a href="#" data-role="button" class="button red">Int</a>
+                </div>
+                <div class="ui-block-b">
+                    <a href="#" data-role="button" class="button red">Mod</a>
+                </div>
+                <div class="ui-block-c">
+                    <a href="#" data-role="button" class="button red">Lsh</a>
+                </div>
+            </div>               
+        </div>
+        <!-- Integer (end) -->
+        
+        <!-- Advanced (start) -->
+        <div data-role="collapsible">
+            <h2>Advanced operations</h2>
+
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <label for="checkbox_inv">Inv</label>
+                    <input type="checkbox" name="inv" value="inv" id="checkbox_inv" class="custom" />
+                </div>
+                <div class="ui-block-b">
+                    <label for="checkbox_hyp">Hyp</label>
+                    <input type="checkbox" name="hyp" value="hyp" id="checkbox_hyp" class="custom" />
+                </div>
+            </div>
+
+            <div class="ui-grid-c">
+                <div class="ui-block-a">
+                    <a href="#" data-role="button" class="button blue">pi</a>
+                </div>
+                <div class="ui-block-b">
+                    <a href="#" data-role="button" class="button violet decimal">sin</a>
+                </div>
+                <div class="ui-block-c">
+                    <a href="#" data-role="button" class="button violet decimal">cos</a>
+                </div>
+                <div class="ui-block-d">
+                    <a href="#" data-role="button" class="button violet decimal">tan</a>
+                </div>
+            </div>
+
+            <div class="ui-grid-c">
+                <div class="ui-block-a">
+                    <a href="#" data-role="button" class="button violet">x^2</a>
+                </div>
+                <div class="ui-block-b">
+                    <a href="#" data-role="button" class="button violet">x^3</a>
+                </div>
+                <div class="ui-block-c">
+                    <a href="#" data-role="button" class="button violet">x^y</a>
+                </div>
+                <div class="ui-block-d">
+                    <a href="#" data-role="button" class="button violet">n!</a>
+                </div>
+            </div>
+            
+            <div class="ui-grid-c">
+                <div class="ui-block-a">
+                    <a href="#" data-role="button" class="button violet">1/x</a>
+                </div>
+                <div class="ui-block-b">
+                    <a href="#" data-role="button" class="button violet">log</a>
+                </div>
+                <div class="ui-block-c">
+                    <a href="#" data-role="button" class="button violet">ln</a>
+                </div>
+                <div class="ui-block-d">
+                    <a href="#" data-role="button" class="button violet decimal">dms</a>
+                </div>
+            </div>
+            
+            <div class="ui-grid-c">
+                <div class="ui-block-a">
+                    <a href="#" data-role="button" class="button violet decimal">F-E</a>
+                </div>
+                <div class="ui-block-b">
+                    <a href="#" data-role="button" class="button violet decimal">Exp</a>
+                </div>
+                <div class="ui-block-c">
+                    <a href="#" data-role="button" class="button violet">(</a>
+                </div>
+                <div class="ui-block-d">
+                    <a href="#" data-role="button" class="button violet">)</a>
+                </div>
+            </div>      
+        </div>
+        <!-- Advanced (end) -->        
+        
+        <!-- Metrics (start) -->
+        <div data-role="collapsible">
+            <h2>Metrics</h2>
+
+            <div>
+                <select name="base" id="input_base">
+                   <option value="hexadecimal">Hexadecimal</option>
+                   <option value="decimal" selected="selected">Decimal</option>
+                   <option value="octal">Octal</option>
+                   <option value="binary">Binary</option>
+                </select>
+            </div>
+            <div>
+                <select name="metric" id="input_metric">
+                   <option value="degrees">Degrees</option>
+                   <option value="radians" selected="selected">Radians</option>
+                   <option value="grads">Grads</option>
+                </select>
+            </div>
+            <div>
+                <select name="range" id="input_range">
+                   <option value="qword">Qword</option>
+                   <option value="dword" selected="selected">Dword</option>
+                   <option value="word">Word</option>
+                   <option value="byte">Byte</option>
+                </select>
+            </div>
+        </div>
+        <!-- Metrics (end) -->
+
+        <!-- Statistics (start) -->
+        <div data-role="collapsible">
+            <h2>Statistics</h2>
+
+            <div class="ui-grid-c">
+                <div class="ui-block-a">
+                    <a href="#" data-role="button" class="button blue">Ave</a>
+                </div>
+                <div class="ui-block-b">
+                    <a href="#" data-role="button" class="button blue">Sum</a>
+                </div>
+                <div class="ui-block-c">
+                    <a href="#" data-role="button" class="button blue">s</a>
+                </div>
+                <div class="ui-block-d">
+                    <a href="#" data-role="button" class="button blue">Dat</a>
+                </div>
+            </div>
+
+            <div class="ui-grid-b">
+                <div class="ui-block-a">
+                    <a href="#" data-role="button" class="button" id="a_stats_load">Load</a>
+                </div>
+                <div class="ui-block-b">
+                    <a href="#" data-role="button" class="button" id="a_stats_cd">CD</a>
+                </div>
+                <div class="ui-block-c">
+                    <a href="#" data-role="button" class="button" id="a_stats_cad">CAD</a>
+                </div>
+            </div>
+
+            <div>
+                <select name="datos"  id="select_statistics_datos">
+
+                </select>            
+            </div>
+        </div>
+        <!-- Statistics (end) -->        
+    </div>
+    <!-- Content (end) -->
+</div>
+<!-- Calculator page (end) -->
+
+<!-- Help page (start) -->
+<div data-role="page"  id="page_help">
+
+    <div data-role="header" data-position="fixed">
+        <a href="index.html#page_calculator" data-role="button" data-icon="grid">Calc</a>
+        <h1><img src="icon/histrix.png" alt="" title="Histrix Calculator"/> Histrix</h1>
+        <a href="index.html#page_help" data-role="button" data-icon="info">Help</a>
+    </div>
+
+    <div data-role="content">
+        <div data-role="collapsible"  data-collapsed="false">
+            <h2>Basic buttons</h2>
+            <ul data-role="listview">
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="blue">0-9</strong></div>
+                        <div class="ui-block-b" style="white-space: normal;">Puts this number in the calculator display.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="blue">+/-<</strong></div>
+                        <div class="ui-block-b">Changes the sign of the displayed number.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="blue">.</strong></div>
+                        <div class="ui-block-b">Inserts a decimal point.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="red">+, -, *, /</strong></div>
+                        <div class="ui-block-b">Add, substract, multiply or divide.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="red">=</strong></div>
+                        <div class="ui-block-b">Performs any operation on the previous two numbers.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="red">Back space</strong></div>
+                        <div class="ui-block-b">Deletes the last digit of the displayed number.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="red">CE</strong></div>
+                        <div class="ui-block-b">Clears the number displayed at that time.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="red">CA</strong></div>
+                        <div class="ui-block-b">Clears the entire calculation.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="blue">sqrt</strong></div>
+                        <div class="ui-block-b">Calculates the square root of the displayed number.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="blue">%</strong></div>
+                        <div class="ui-block-b">Displays the result of multiplication as a percentage. Enter one number, click *, enter the second number, and then click %. For example, 50 * 25% will display 12.5. You can also perform operations with percentages. Enter one number, click the operator (+, -, *, or /), enter the second number, click %, and then click =. For example, 50 + 25% (of 50) = 62.5.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="blue">1/x</strong></div>
+                        <div class="ui-block-b">Calculates the reciprocal of the displayed number.</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div data-role="collapsible">
+            <h2>Memory</h2>
+            <ul data-role="listview">
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="red">MC</strong></div>
+                        <div class="ui-block-b">Clears any number stored in memory.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="red">MR</strong></div>
+                        <div class="ui-block-b">Recalls the number stored in memory. The number remains in memory.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="red">MS</strong></div>
+                        <div class="ui-block-b">Stores the displayed number in memory.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="red">M+</strong></div>
+                        <div class="ui-block-b">Adds the displayed number to any number already in memory but does not display the sum of these numbers.</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div data-role="collapsible">
+            <h2>Integer's operations</h2>
+            <ul data-role="listview">
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="red">Mod</strong></div>
+                        <div class="ui-block-b">Displays the modulus, or remainder, of x/y. Use this button as a binary operator.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="red">Or</strong></div>
+                        <div class="ui-block-b">Calculates bitwise OR. The behavior of logical operators is undefined unless the inputs are integers.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="red">Lsh</strong></div>
+                        <div class="ui-block-b">Shifts left. To shift right, use "Inv" + "Lsh". After clicking this button, you must specify (in binary) how many positions to the left or to the right you want to shift the number in the display area, and then click "=". The behavior of logical operators is undefined unless the inputs are integers.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="red">And</strong></div>
+                        <div class="ui-block-b">Calculates bitwise AND. The behavior of logical operators is undefined unless the inputs are integers.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="red">Xor</strong></div>
+                        <div class="ui-block-b">Calculates bitwise exclusive OR. The behavior of logical operators is undefined unless the inputs are integers.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="red">Not</strong></div>
+                        <div class="ui-block-b">Calculates bitwise inverse. The behavior of logical operators is undefined unless the inputs are integers.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="red">Int</strong></div>
+                        <div class="ui-block-b">Displays the integer portion of a decimal value. To display the fractional portion of a decimal value, use "Inv" + "Int".</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+        <div data-role="collapsible">
+            <h2>Advanced calculations</h2>
+            <ul data-role="listview">
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="violet">F-E</strong></div>
+                        <div class="ui-block-b">Turns scientific notation on and off. You can use "F-E" only with the decimal number system.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="violet">dms</strong></div>
+                        <div class="ui-block-b">Converts the displayed number to degree-minute-second format (assuming that the displayed number is in degrees). To convert the displayed number to degrees (assuming that the displayed number is in degree-minute-second format), use "Inv " + "dms". You can use dms only with the decimal number system.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="violet">sin</strong></div>
+                        <div class="ui-block-b">Calculates the sine of the displayed number. To calculate the arc sine, use Inv+sin. To calculate the hyperbolic sine, use "Hyp" + "sin". To calculate the arc hyperbolic sine, use "Inv" + "Hyp" + "sin". You can use sin only with the decimal number system.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="violet">cos</strong></div>
+                        <div class="ui-block-b">Calculates the cosine of the displayed number. To calculate the arc cosine, use "Inv" + "cos". To calculate the hyperbolic cosine, use "Hyp" + "cos". To calculate the arc hyperbolic cosine, use "Inv" + "Hyp" + "cos". You can use "cos" only with the decimal number system.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="violet">tan</strong></div>
+                        <div class="ui-block-b">Calculates the tangent of the displayed number. To calculate the arc tangent, use Inv+tan. To calculate the hyperbolic tangent, use "Hyp" + "tan". To calculate the arc hyperbolic tangent, use "Inv" + "Hyp" + "tan". You can use tan only with the decimal number system.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="violet">(</strong></div>
+                        <div class="ui-block-b">Starts a new level of parentheses. The current number of levels appears in the box above the ")" button.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="violet">)</strong></div>
+                        <div class="ui-block-b">Closes the current level of parentheses.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="violet">Exp</strong></div>
+                        <div class="ui-block-b">Allows entry of scientific-notation numbers. You can use only decimal digits (keys 0 through 9) in the exponent. You can use "Exp" only with the decimal number system.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="violet">ln</strong></div>
+                        <div class="ui-block-b">Calculates natural (base e) logarithm. To calculate e raised to the xth power, where x is the current number, use "Inv" + "ln".</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="violet">log</strong></div>
+                        <div class="ui-block-b">Calculates the common (base 10) logarithm. To calculate 10 raised to the xth power, use "Inv" + "log".</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="blue">pi</strong></div>
+                        <div class="ui-block-b">Displays the value of pi (3.1415...). To display 2 * pi (6.28...), use "Inv" + "pi". You can use pi only with the decimal number system.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="violet">A-F</strong></div>
+                        <div class="ui-block-b">Enters the selected letter in the value. This button is available only if hexadecimal mode is turned on.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong>Inv</strong></div>
+                        <div class="ui-block-b">Sets the inverse function for "sin", "cos", "tan", "PI", "x^y", "x^2", "x^3", "ln", "log", "Ave", "Sum", and "s". The functions automatically turn off the inverse function after a calculation is completed.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong>Hyp</strong></div>
+                        <div class="ui-block-b">Sets the hyperbolic function for "sin", "cos", and "tan". The functions automatically turn off the hyperbolic function after a calculation is completed.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="violet">x^2</strong></div>
+                        <div class="ui-block-b">Squares the displayed number. To calculate the square root, use "Inv" + "x^2".</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="violet">x^3</strong></div>
+                        <div class="ui-block-b">Cubes the displayed number. To calculate the cube root, use "Inv" + "x^3".</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="violet">x^y</strong></div>
+                        <div class="ui-block-b">Computes x raised to the yth power. Use this button as a binary operator. To calculate the yth root of x, use "Inv" + "x^y".</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="violet">n!</strong></div>
+                        <div class="ui-block-b">Calculates the factorial of the displayed number.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="violet">1/x</strong></div>
+                        <div class="ui-block-b">Calculates the reciprocal of the displayed number.</div>
+                    </div>
+                </li>
+            </ul>
+        </div>        
+        
+        <div data-role="collapsible">
+            <h2>Metrics</h2>
+            <ul data-role="listview">
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong>Hex</strong></div>
+                        <div class="ui-block-b">Converts the displayed number to the hexadecimal number system.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong>Dec</strong></div>
+                        <div class="ui-block-b">Converts the displayed number to the decimal number system.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong>Oct</strong></div>
+                        <div class="ui-block-b">Converts the displayed number to the octal number system.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong>Bin</strong></div>
+                        <div class="ui-block-b">Converts the displayed number to the binary number system.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong>Degrees</strong></div>
+                        <div class="ui-block-b">Sets trigonometric input for degrees when in decimal mode.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong>Radians</strong></div>
+                        <div class="ui-block-b">Sets trigonometric input for radians when in decimal mode.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong>Grads</strong></div>
+                        <div class="ui-block-b">Sets trigonometric input for grads when in decimal mode.</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div data-role="collapsible">
+            <h2>Statistics</h2>
+            <ul data-role="listview">
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="blue">Ave</strong></div>
+                        <div class="ui-block-b">Calculates the mean of the values displayed in the Statistics Box dialog box. To calculate the mean of the squares, use "Inv" + "Ave".</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="blue">Sum</strong></div>
+                        <div class="ui-block-b">Calculates the sum of the values displayed in the Statistics Box dialog box. To calculate the sum of the squares, use "Inv" + "Sum".</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="blue">s</strong></div>
+                        <div class="ui-block-b">Calculates standard deviation with the population parameter as –1. To calculate standard deviation with the population parameter as n, use "Inv" + "s".</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong class="blue">Dat</strong></div>
+                        <div class="ui-block-b">Enters the displayed number in the Statistics Box dialog box.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong>Ret</strong></div>
+                        <div class="ui-block-b">Returns control to the calculator.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong>Load</strong></div>
+                        <div class="ui-block-b">Loads the selected data point into the display of the calculator.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong>CD</strong></div>
+                        <div class="ui-block-b">Clears the selected data point out of the list.</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong>CAD</strong></div>
+                        <div class="ui-block-b">Clears all data points out of the list.</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Help page (end) -->
+
+
+    
+</body>
+</html>
