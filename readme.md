@@ -3,7 +3,7 @@ Histrix Calculator
 
 **Histrix** is a JavaScript calculator with the same the functionalities that the classic calculator from Windows XP / Windows Vista.
 
-It posses two modes, standard and scientific, and a brief description of the functionality provided by each button.
+It posses two modes (standard and scientific), provides a brief description of the functionality of each button, and it comes in two flavors: one for [desktop computers](https://jfmdev.github.io/histrix/desktop/index.html) and another for [mobile devices](https://jfmdev.github.io/histrix/mobile/index.html).
 
 Ideal for those who wants to use the classic calculator provided by Windows XP / Windows Vista but that can not since they work with another operating system (as Linux, Mac OS or a newer versions of Windows).
 
